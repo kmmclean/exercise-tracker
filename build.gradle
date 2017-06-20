@@ -25,7 +25,10 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
 	compile('org.springframework.boot:spring-boot-starter-web')
-	runtime('org.springframework.boot:spring-boot-devtools')
+	compile('org.webjars:webjars-locator:0.32-1')
+	compile('org.webjars:bootstrap:3.3.7-1')
+    compile('org.webjars:jquery:3.2.1')
+    runtime('org.springframework.boot:spring-boot-devtools')
 	runtime('com.h2database:h2')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
