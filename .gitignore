@@ -25,4 +25,4 @@ nbdist/
 .nb-gradle/
 
 ### Database ###
-/fitness-tracker.mv.db
+*.db
