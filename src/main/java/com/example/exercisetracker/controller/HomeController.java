@@ -18,6 +18,6 @@ public class HomeController {
     @GetMapping(path = "/register", name = "homeRegister")
     public String register() { return "home/register"; }
 
-    @GetMapping(path = "/login", name = "homeLogin")
+    @RequestMapping(path = "/login", name = "homeLogin")
     public String login() { return "home/login"; }
 }

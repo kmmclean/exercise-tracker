@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -23,14 +24,18 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a th:href="${#mvc.url('logIndex').build()}">Log Exercise</a></li>
-                <li><a th:href="${#mvc.url('reportIndex').build()}">Reports</a></li>
+                <li sec:authorize="isAuthenticated()"><a th:href="${#mvc.url('logIndex').build()}">Log Exercise</a></li>
+                <li sec:authorize="isAuthenticated()"><a th:href="${#mvc.url('reportIndex').build()}">Reports</a></li>
                 <li><a th:href="${#mvc.url('homeAbout').build()}">About</a></li>
             </ul>
-            <ul class="nav navbar-nav navbar-right">
+            <ul sec:authorize="!isAuthenticated()" class="nav navbar-nav navbar-right">
                 <li><a th:href="${#mvc.url('homeRegister').build()}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
                 <li><a th:href="${#mvc.url('homeLogin').build()}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             </ul>
+            <form sec:authorize="isAuthenticated()" class="navbar-form navbar-right" th:action="@{/logout}" method="post">
+                <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-log-out" /> Logout</button>
+            </form>
+            <p sec:authorize="isAuthenticated()" class="navbar-text navbar-right">Logged in as <strong sec:authentication="name">user@example.com</strong></p>
         </div>
     </div>
 </nav>
