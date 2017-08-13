@@ -6,7 +6,7 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @PasswordMatch
-public class RegisterForm {
+public class RegisterDTO {
 	@NotEmpty(message = "Email address cannot be blank")
 	@Email(message = "Email address must be in a valid format")
 	private String email;

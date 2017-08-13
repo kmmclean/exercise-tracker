@@ -2,7 +2,7 @@
     <div class="panel panel-default">
         <div class="panel-heading">Register</div>
         <div class="panel-body">
-            <form th:object="${registerForm}" th:action="${#mvc.url('homeSignUp').build()}" method="post">
+            <form th:object="${registerDTO}" th:action="${#mvc.url('homeSignUp').build()}" method="post">
                 <div class="form-group" th:classappend="${#fields.hasErrors('email')} ? has-error">
                     <label class="control-label" for="email">Email</label>
                     <input th:field="*{email}" type="email" class="form-control" />
