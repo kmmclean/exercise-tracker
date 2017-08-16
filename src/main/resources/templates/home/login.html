@@ -1,4 +1,7 @@
 <div layout:decorator="layouts/default" layout:fragment="content">
+    <div th:if="${loginFailure}" class="alert alert-danger" th:text="${loginFailure}">
+        Login failure.
+    </div>
     <div class="panel panel-default">
         <div class="panel-heading">Login</div>
         <div class="panel-body">

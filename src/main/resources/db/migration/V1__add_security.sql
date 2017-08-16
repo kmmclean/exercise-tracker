@@ -11,16 +11,16 @@ create table users
 create table roles
 (
     id int not null auto_increment,
-    role varchar(100) not null,
+    name varchar(100) not null,
     description varchar(max) not null,
     primary key (id)
 );
 
-insert into roles (role, description)
-values ('ROLE_ADMIN', 'Has access to the administrative section of the application and manages all users.');
+insert into roles (id, name, description)
+values (1, 'ROLE_ADMIN', 'Has access to the administrative section of the application and manages all users.');
 
-insert into roles (role, description)
-values ('ROLE_USER', 'Basic account that allows a user to log their daily exercise activity.');
+insert into roles (id, name, description)
+values (2, 'ROLE_USER', 'Basic account that allows a user to log their daily exercise activity.');
 
 create table user_roles
 (

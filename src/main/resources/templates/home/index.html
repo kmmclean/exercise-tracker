@@ -1,6 +1,6 @@
 <div layout:decorator="layouts/default" layout:fragment="content">
     <div class="jumbotron">
         <h1>Welcome to the Exercise Tracker</h1>
-        <p>To get started, please <a th:href="${#mvc.url('homeLogin').build()}">log in</a> or <a th:href="${#mvc.url('homeRegister').build()}">sign up</a> for an account.</p>
+        <p sec:authorize="!isAuthenticated()">To get started, please <a th:href="${#mvc.url('homeLogin').build()}">log in</a> or <a th:href="${#mvc.url('homeRegister').build()}">sign up</a> for an account.</p>
     </div>
 </div>
