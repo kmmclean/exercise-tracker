@@ -1,44 +1,23 @@
 package com.example.exercisetracker.model;
 
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name = "users")
-public class User implements Serializable {
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+public class User extends BaseEntity implements Serializable {
 	private String email;
 	private String password;
 	private String firstName;
 	private String lastName;
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "user_roles",
-		joinColumns = @JoinColumn(name = "user_id"),
-		inverseJoinColumns = @JoinColumn(name = "role_id"))
+		joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+		inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
 	private List<Role> roles;
-
-	public User() {
-	}
-
-	public User(Long id, String email, String password, String firstName, String lastName, List<Role> roles) {
-		this.id = id;
-		this.email = email;
-		this.password = password;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.roles = roles;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getEmail() {
 		return email;

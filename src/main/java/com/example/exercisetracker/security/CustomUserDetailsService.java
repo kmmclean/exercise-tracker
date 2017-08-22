@@ -7,8 +7,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import com.example.exercisetracker.repository.UserRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class CustomUserDetailsService implements UserDetailsService {
 	private UserRepository userRepository;
 
