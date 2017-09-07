@@ -35,7 +35,7 @@
             <form sec:authorize="isAuthenticated()" class="navbar-form navbar-right" th:action="@{/logout}" method="post">
                 <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-log-out" /> Logout</button>
             </form>
-            <p sec:authorize="isAuthenticated()" class="navbar-text navbar-right">Logged in as <strong sec:authentication="name">user@example.com</strong></p>
+            <p sec:authorize="isAuthenticated()" class="navbar-text navbar-right">Logged in as <strong th:text="${#authentication.getPrincipal().getName()}">Example User</strong></p>
         </div>
     </div>
 </nav>

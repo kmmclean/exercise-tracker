@@ -37,7 +37,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-                .antMatchers("/webjars/**", "/css/**", "/", "/about", "/register", "/h2-console/**").permitAll()
+                .antMatchers("/webjars/**", "/css/**", "/", "/about", "/register", "/h2-console/**", "/verify-account/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
             .csrf()
@@ -51,7 +51,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .failureHandler((request, response, exception) -> {
                     SessionFlashMapManager manager = new SessionFlashMapManager();
                     FlashMap flashMap = new FlashMap();
-                    flashMap.put("loginFailure", "Your email and/or password is invalid.");
+                    flashMap.put("loginFailure", exception.getMessage());
                     manager.saveOutputFlashMap(flashMap, request, response);
                     response.sendRedirect("/login");
                 })

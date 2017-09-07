@@ -12,28 +12,25 @@ public class StrongPasswordValidator implements ConstraintValidator<StrongPasswo
 
 	@Override
 	public boolean isValid(String value, ConstraintValidatorContext context) {
-		CharacterCharacteristicsRule characteristicsRule = new CharacterCharacteristicsRule();
-		characteristicsRule.setNumberOfCharacteristics(3);
-		characteristicsRule.setRules(Arrays.asList(
-				new CharacterRule(EnglishCharacterData.UpperCase, 1),
-				new CharacterRule(EnglishCharacterData.LowerCase, 1),
-				new CharacterRule(EnglishCharacterData.Special, 1),
-				new CharacterRule(EnglishCharacterData.Digit, 1)
-		));
+		LengthRule lengthRule = new LengthRule(12, 50); // Password must be at least 12 characters long.
 
-		PasswordValidator validator = new PasswordValidator(Arrays.asList(
-			new LengthRule(12, 50),
-			characteristicsRule
+		CharacterCharacteristicsRule variableRule = new CharacterCharacteristicsRule();
+		variableRule.setRules(Arrays.asList(
+			new CharacterRule(EnglishCharacterData.UpperCase, 1),
+			new CharacterRule(EnglishCharacterData.LowerCase, 1),
+			new CharacterRule(EnglishCharacterData.Digit, 1),
+			new CharacterRule(EnglishCharacterData.Special, 1)
 		));
+		variableRule.setNumberOfCharacteristics(3); // Password must meet at least 3 out of 4 rules.
 
+		PasswordValidator validator = new PasswordValidator(Arrays.asList(lengthRule, variableRule));
 		RuleResult result = validator.validate(new PasswordData(value));
 
 		if (!result.isValid()) {
 			context.disableDefaultConstraintViolation();
-			validator.getMessages(result).stream().forEach(message ->
-				context.buildConstraintViolationWithTemplate(message).addConstraintViolation()
-			);
-
+			for (String message : validator.getMessages(result)) {
+				context.buildConstraintViolationWithTemplate(message).addConstraintViolation();
+			}
 			return false;
 		}
 

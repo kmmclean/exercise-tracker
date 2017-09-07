@@ -5,6 +5,10 @@ create table users
     last_name varchar(100) not null,
     email varchar(254) not null,
     password varchar(60) not null,
+    account_expiration timestamp null,
+    password_expiration timestamp null,
+    verified bit not null,
+    active bit not null,
     created_date timestamp not null,
     created_by int not null,
     last_modified_date timestamp not null,
@@ -12,8 +16,37 @@ create table users
     primary key (id)
 );
 
-insert into users (id, first_name, last_name, email, password, created_date, created_by, last_modified_date, last_modified_by)
-values (1, 'System', 'Administrator', 'system.administrator@example.com', '$2a$12$7r9wZfRQUJd5QZqpjlskZ.0ptavAaICMsF9afK8Aja9H3LhOVnyuK', current_timestamp, 1, current_timestamp, 1);
+insert into users
+(
+    id,
+    first_name,
+    last_name,
+    email,
+    password,
+    account_expiration,
+    password_expiration,
+    verified,
+    active,
+    created_date,
+    created_by,
+    last_modified_date,
+    last_modified_by
+)
+values
+(
+    1,
+    'System',
+    'Administrator',
+    'system.administrator@example.com',
+    '$2a$12$7r9wZfRQUJd5QZqpjlskZ.0ptavAaICMsF9afK8Aja9H3LhOVnyuK',
+    dateadd(day, 90, current_timestamp),
+    dateadd(day, 60, current_timestamp),
+    1,
+    1,
+    current_timestamp,
+    1,
+    current_timestamp,
+    1);
 
 create table roles
 (
